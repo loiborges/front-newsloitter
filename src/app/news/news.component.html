@@ -1,0 +1,27 @@
+<nav class="navbar navbar-expand navbar-dark">
+
+  <ul class="navbar-nav w-100">
+    <li class="nav-item d-none d-sm-inline-block">
+      <h3 style="color: whitesmoke; margin-right: 30px">NewsLoitter</h3>
+<!--      <img href="" class="nav-link" src="./assets/logo-trans.png">-->
+    </li>
+    <li class="nav-item d-none d-sm-inline-block">
+      <a [routerLink]="['/news']" href="" class="nav-link">Envios</a>
+    </li>
+    <li class="nav-item d-none d-sm-inline-block">
+      <a [routerLink]="['/news/clientes']" class="nav-link">Clientes</a>
+    </li>
+    <li class="nav-item d-none d-sm-inline-block">
+      <a [routerLink]="['/news/categorias']" class="nav-link">Categorias</a>
+    </li>
+  </ul>
+
+
+</nav>
+<router-outlet></router-outlet>
+<footer class="bd-footer py-4 mb-4 bg-light">
+  <strong class="ml-3">
+    Copyright © 2023 NewsLoitter.
+  </strong>
+  Todos os direitos reservados.
+</footer>

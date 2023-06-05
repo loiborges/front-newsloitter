@@ -1,0 +1,171 @@
+<section class="content">
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h5 class="m-0">Lista de Envios</h5>
+        </div><!-- /.col -->
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item">
+              <a [routerLink]="['']">Home</a>
+            </li>
+            <li class="breadcrumb-item active">
+              Envios
+            </li>
+          </ol>
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card ml-3 mr-3">
+        <div class="card-header with-border">
+          <button pButton data-toggle="modal" data-target="#modal-create" type="button" label="+ Novo envio" class="p-button-sm p-button-help p-button-outlined"></button>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <p-table
+              #dt
+              [value]="envios"
+              dataKey="id"
+              styleClass="p-datatable-striped"
+              [rowHover]="true"
+              [rows]="10"
+              [showCurrentPageReport]="true"
+              [rowsPerPageOptions]="[10, 50, 100]"
+              [loading]="loading"
+              [paginator]="true"
+              currentPageReportTemplate="Envio {first} à {last} de {totalRecords}"
+              [filterDelay]="0"
+            >
+              <ng-template pTemplate="header">
+                <tr>
+                  <th style="width: 20%" pSortableColumn="email">
+                    Email <p-sortIcon field="email"></p-sortIcon>
+                  </th>
+                  <th style="width: 30%" pSortableColumn="categoria">
+                    Categoria <p-sortIcon field="categoria"></p-sortIcon>
+                  </th>
+                  <th style="width: 20%" pSortableColumn="status">
+                    Status <p-sortIcon field="status"></p-sortIcon>
+                  </th>
+                  <th style="width: 20%" pSortableColumn="dataEnvio">
+                    Data envio<p-sortIcon field="dataEnvio"></p-sortIcon>
+                  </th>
+                  <th style="width: 20%" pSortableColumn="msgErro">
+                    Erro<p-sortIcon field="msgErro"></p-sortIcon>
+                  </th>
+                </tr>
+                <tr>
+                  <th>
+                    <input
+                      pInputText
+                      type="text"
+                      (input)="dt.filter($event.target.value, 'email', 'contains')"
+                      placeholder="Busca por email"
+                      class="p-column-filter w-100"
+                    />
+                  </th>
+                  <th>
+                    <input
+                      pInputText
+                      type="text"
+                      (input)="dt.filter($event.target.value, 'categoria', 'contains')"
+                      placeholder="Busca por categoria"
+                      class="p-column-filter w-100"
+                    />
+                  </th>
+                  <th>
+                    <input
+                      pInputText
+                      type="text"
+                      (input)="dt.filter($event.target.value, 'status', 'contains')"
+                      placeholder="Busca por status"
+                      class="p-column-filter w-100"
+                    />
+                  </th>
+                  <th>
+                    <input
+                      pInputText
+                      type="text"
+                      (input)="dt.filter($event.target.value, 'dataEnvio', 'contains')"
+                      placeholder="Busca por data"
+                      class="p-column-filter w-100"
+                    />
+                  </th>
+                  <th></th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-envio>
+                <tr [routerLink]="['/news/envio/1']">
+                  <td>{{envio.email}}</td>
+                  <td>{{envio.categoria}}</td>
+                  <td>{{envio.status}}</td>
+                  <td>{{envio.dataEnvio | date : 'dd/MM/yyyy'}}</td>
+                  <td>{{envio.msgErro}}</td>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="emptymessage">
+                <tr>
+                  <td colspan="8">Nenhum envio encontrado</td>
+                </tr>
+              </ng-template>
+            </p-table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<div class="modal fade" id="modal-create" style="display: none;" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Novo envio</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="form-group" name="formEnvio" id="formEnvio">
+          <div class="form-group">
+            <label>Categorias</label>
+            <p-dropdown
+              name="categorias"
+              [showClear]="true"
+              [options]="categorias"
+              optionValue="descricao"
+              optionLabel="descricao"
+              placeholder="Selecione a categoria"
+              [(ngModel)]="categoria"
+            >
+            </p-dropdown>
+<!--            <select class="form-control">-->
+<!--              <option>Selecione a categoria</option>-->
+<!--            </select>-->
+          </div>
+          <div class="form-group">
+            <label>Mensagem</label>
+            <textarea pInputTextarea type="text" class="form-control" name="mensagem" placeholder="Mensagem/Notícia a ser enviada"  id="solucao" required></textarea>
+
+            <!--            <small *ngIf="modulo.invalid && modulo.touched" class="p-error">Campo obrigatório</small>-->
+          </div>
+          <!-- ==================== -->
+          <!-- FOOTER Modal -->
+          <!-- ==================== -->
+          <div class="modal-footer justify-content-between">
+            <button type="button" class="btn btn-danger" data-dismiss="modal" >Limpar</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Enviar</button>
+          </div>
+        </form>
+        <!---->
+      </div>
+      <!---->
+    </div>
+  </div>
+</div>

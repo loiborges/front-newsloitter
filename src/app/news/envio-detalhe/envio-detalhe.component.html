@@ -1,0 +1,66 @@
+  <section class="content">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h5 class="m-0">Envio</h5>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item">
+                <a [routerLink]="['/news']">Envios</a>
+              </li>
+              <li class="breadcrumb-item active">
+                Detalhes envio
+              </li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+
+    <div class="card ml-3 mr-3">
+      <div class="card-header">
+        <h2 class="card-title">Detalhes do Envio</h2>
+      </div>
+      <!-- /.card-header -->
+      <div class="card-body table-responsive">
+        <table class="table">
+          <tbody>
+          <tr>
+            <th class="text-nowrap" scope="row">Categoria:</th>
+            <td>{{ envio.categoria }}</td>
+            <td></td>
+          </tr>
+          <tr>
+            <th class="text-nowrap" scope="row">Nome cliente:</th>
+            <td>{{ envio.cliente }}</td>
+            <td></td>
+          </tr>
+          <tr>
+            <th class="text-nowrap" scope="row">Email cliente:</th>
+            <td>{{ envio.email }}</td>
+            <td></td>
+          </tr>
+          <tr>
+            <th class="text-nowrap" scope="row">Data de envio:</th>
+            <td>{{envio.dataEnvio | date : 'dd/MM/yyyy' }}</td>
+            <td></td>
+          </tr>
+          <tr>
+            <th class="text-nowrap" scope="row">Status:</th>
+            <td>{{envio.status }}</td>
+            <td></td>
+          </tr>
+          <tr>
+            <th class="text-nowrap" scope="row">Mensagem de erro:</th>
+            <td>{{envio.msgErro}}</td>
+            <td></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- /.card-body -->
+    </div>
+  </section>
